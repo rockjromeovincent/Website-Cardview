@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Casino Lobby Pro | Premium Collection</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0f1a;
+            color: #fff;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== LIQUID BACKGROUND ===== */
+        .liquid {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            filter: blur(130px);
+            opacity: 0.5;
+            animation: move 14s infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .l1 {
+            background: #00f0ff;
+            top: -150px;
+            left: -150px;
+        }
+
+        .l2 {
+            background: #ff00c8;
+            bottom: -150px;
+            right: -150px;
+        }
+
+        .l3 {
+            background: #00ff85;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            height: 450px;
+            animation-delay: 2s;
+        }
+
+        @keyframes move {
+            from {
+                transform: translateY(0) scale(1);
+            }
+            to {
+                transform: translateY(80px) scale(1.2);
+            }
+        }
+
+        /* ===== PREMIUM HEADER (STICKY + GLASS) ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 15, 26, 0.92);
+            backdrop-filter: blur(16px);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 2rem;
+            background: rgba(11, 15, 26, 0.97);
+        }
+
+        /* Logo Styles (Fixed alignment for footer and header) */
+        .logo {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #ffcc00, #ff0066);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.3px;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* Logo Box (for cards) */
+        .logo-box {
+            height: 90px;
+            background: rgba(11, 15, 26, 0.8);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                inset 0 0 0 1px rgba(255, 204, 0, 0.2),
+                inset 0 0 15px rgba(255, 204, 0, 0.15);
+            transition: all 0.3s;
+        }
+
+        .card:hover .logo-box {
+            box-shadow: 
+                inset 0 0 0 1px rgba(255, 204, 0, 0.4),
+                inset 0 0 20px rgba(255, 204, 0, 0.25);
+        }
+
+        .logo-box img {
+            max-width: 85%;
+            max-height: 75%;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .menu a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff0066, #ffcc00);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .menu a:hover {
+            color: #ffcc00;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        .menu-btn {
+            background: linear-gradient(135deg, rgba(255, 0, 102, 0.15), rgba(255, 204, 0, 0.15));
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .menu-btn:hover {
+            background: linear-gradient(135deg, #ff0066, #ffcc00);
+            color: white !important;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .menu-btn::after {
+            display: none;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        /* ===== SLIDER (AUTO SCROLL) ===== */
+        .slider {
+            width: 100%;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 15px;
+            animation: slide 30s linear infinite;
+            width: max-content;
+        }
+
+        .slide-card {
+            min-width: 320px;
+            height: 150px;
+            border-top-left-radius: 28px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 28px;
+            border-bottom-left-radius: 0px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .slide-card:hover {
+            transform: scale(1.02);
+        }
+
+        .slide-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-48%); }
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            width: 90%;
+            height: 2px;
+            margin: 30px auto;
+            background: linear-gradient(90deg, transparent, #00f0ff, #ff00c8, #00ff85, transparent);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        /* ===== CARD GRID ===== */
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 28px 18px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* ===== CARD DESIGN ===== */
+        .card {
+            position: relative;
+            height: 180px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-6px) scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Gradient border effect */
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 1.5px;
+            background: linear-gradient(45deg, #00f0ff, #ff00c8, #00ff85);
+            -webkit-mask: 
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        /* Button */
+        .btn {
+            width: 90%;
+            margin: 12px auto 6px;
+            padding: 8px 12px;
+            border-radius: 30px;
+            border: none;
+            background: linear-gradient(45deg, #00f0ff, #ff00c8);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        /* ===== PREMIUM FOOTER (FULLY FIXED ALIGNMENT) ===== */
+        footer {
+            background: rgba(10, 15, 30, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 40px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Footer Column Styles */
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Brand Column - Fix logo alignment */
+        .footer-col:first-child .logo {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-col:first-child .logo .logo-icon {
+            margin-top: 0;
+        }
+
+        .footer-col:first-child .logo .logo-text {
+            text-align: left;
+        }
+
+        .footer-col:first-child .logo .logo-text h1 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .footer-col:first-child .logo .logo-text p {
+            font-size: 0.7rem;
+            display: block !important; /* Override the global hide */
+            margin-bottom: 6px;
+        }
+
+        .footer-col:first-child .logo .logo-text h4 {
+            display: none;
+        }
+
+        /* Description text styling */
+        .brand-description {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.4;
+            margin: 0.5rem 0 1rem 0;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 35px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff0066, #ffcc00);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .footer-col:hover h4::after {
+            width: 55px;
+        }
+
+        /* Footer links with chevron icons */
+        .footer-col p,
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.7rem;
+            transition: all 0.3s;
+            gap: 8px;
+        }
+
+        .footer-col a i {
+            width: 16px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .footer-col a:hover {
+            color: #ffcc00;
+            transform: translateX(5px);
+        }
+
+        .footer-col a:hover i {
+            color: #ffcc00;
+            transform: translateX(3px);
+        }
+
+        /* Contact icons - proper alignment */
+        .footer-col p i {
+            width: 20px;
+            margin-right: 0;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Social Links - Perfect Alignment */
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            transition: all 0.3s;
+            margin-bottom: 0;
+            padding: 0;
+        }
+
+        .social-links a i {
+            width: auto;
+            margin: 0;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, #ff0066, #ffcc00);
+            transform: translateY(-3px);
+        }
+
+        .social-links a:hover i {
+            color: white;
+            transform: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .footer-bottom i {
+            color: #ff0066;
+            margin: 0 3px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(11, 15, 26, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                transition: left 0.4s;
+                z-index: 99;
+            }
+            
+            .menu.active {
+                left: 0;
+            }
+            
+            .menu a {
+                font-size: 1.1rem;
+            }
+            
+            .menu-btn {
+                margin-top: 0.5rem;
+            }
+            
+            .slider-track {
+                animation: slide 20s linear infinite;
+            }
+            
+            .slide-card {
+                min-width: 260px;
+                height: 120px;
+            }
+            
+            .footer-content {
+                gap: 2rem;
+            }
+            
+            .footer-col {
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-col h4 {
+                display: inline-block;
+                width: auto;
+            }
+            
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-col a {
+                justify-content: center;
+            }
+            
+            .footer-col:first-child .logo {
+                justify-content: center;
+            }
+            
+            .footer-col:first-child .logo .logo-text {
+                text-align: center;
+            }
+            
+            .brand-description {
+                text-align: center;
+            }
+            
+            .footer-col p {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            header {
+                padding: 0.8rem 1rem;
+            }
+            
+            footer {
+                padding: 2rem 1rem 1rem;
+            }
+            
+            .footer-content {
+                gap: 1.8rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #00f0ff, #ff00c8);
+            border-radius: 10px;
+        }
+</style>
+</head>
+
+<body>
+    
+<!-- Liquid Background -->
+<div class="liquid l1"></div>
+<div class="liquid l2"></div>
+<div class="liquid l3"></div>
+
+<!-- ===== PREMIUM HEADER ===== -->
+<header id="mainHeader">
+    <div class="logo" id="logoClick">
+        <div class="logo-icon">
+            <img src="https://ik.imagekit.io/kpx40qv3r/Bestbd/BESTBD%20LOGO%20360.png" alt="Slot Hunter Bd Logo" onerror="this.src='https://placehold.co/48x48/1a1a2e/ffcc00?text=SH'">
+        </div>
+        <div class="logo-text">
+            <h1>Slot Hunter Bd</h1>
+            <p>Top Ranking Payable Game Finder Bd</p>
+        </div>
+    </div>
+    
+    <div class="menu" id="navMenu">
+        <a href="#" class="active">Home</a>
+        <a href="#">Games</a>
+        <a href="#">VIP</a>
+        <a href="#">Promo</a>
+        <a href="#" class="menu-btn">Connect <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    <div class="mobile-toggle" id="mobileToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+<!-- ===== AUTO SLIDER ===== -->
+<div class="slider">
+    <div class="slider-track" id="sliderTrack"></div>
+</div>
+
+<!-- Divider -->
+<div class="divider"></div>
+
+<!-- ===== CARD GRID ===== -->
+<div class="container" id="cards"></div>
+
+<!-- ===== PREMIUM FOOTER (FIXED ALIGNMENT: logo, text, social icons properly aligned) ===== -->
+<footer>
+    <div class="footer-content">
+        <!-- Column 1: Brand Info - Fixed alignment -->
+        <div class="footer-col">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://ik.imagekit.io/kpx40qv3r/Bestbd/BESTBD%20LOGO%20360.png" alt="Slot Hunter Bd Logo" onerror="this.src='https://placehold.co/48x48/1a1a2e/ffcc00?text=SH'">
+                </div>
+                <div class="logo-text">
+                    <h1>Slot Hunter Bd</h1>
+                    <p>Top Ranking Payable Game Finder Bd</p>
+                </div>
+            </div>
+            <p class="brand-description">Premium gaming experience with stunning effects and exclusive rewards. Discover the best games with our expert ranking system.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+        
+        <!-- Column 2: Quick Links with chevron icons -->
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="#"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Games</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> VIP Club</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Promotions</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Support</a>
+        </div>
+        
+        <!-- Column 3: Legal with chevron icons -->
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Cookie Policy</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Responsible Gaming</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> AML Policy</a>
+        </div>
+        
+        <!-- Column 4: Contact Info with proper icon alignment -->
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <p><i class="fas fa-envelope"></i> support@casinolobby.com</p>
+            <p><i class="fas fa-phone-alt"></i> +1 234 567 8900</p>
+            <p><i class="fab fa-whatsapp"></i> +1 234 567 8900</p>
+            <p><i class="fas fa-clock"></i> 24/7 Customer Support</p>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Gaming Street, NY</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2025 Casino Lobby Pro | Designed with <i class="fas fa-heart"></i> for premium experience</p>
+    </div>
+</footer>
+
+<script>
+// ===== LOGO DATA FOR CARDS =====
+        const logos = [
+            "https://images.3354797.com/wsd-images-prod/bajeebdf2/fe_setting/web_logo/wps_bajeebdf2_logo_20251028144718.png",
+            "https://images.23924894.com/wsd-images-prod/bet15bdtf6/fe_setting/web_logo/wps_bet15bdtf6_logo_20251211173746.png",
+            "https://images.33089393.com/wsd-images-prod/399bdtf6/fe_setting/web_logo/wps_500_20250512182815.png",
+            "https://images.3521315.com/wsd-images-prod/333bdtf7/fe_setting/web_logo/wps_510-100_(3)_20250921143829.png",
+            "https://www.21viptaka.com/img/logo.63354680.png",
+            "https://www.98hibajee.com/res/img/logo.7c78981.png"
+        ];
+
+        // ===== SLIDER IMAGES =====
+        const slideImages = [
+            "https://images.6223027.com/mcs-images/announcement/bet14bdtf5/1778329361333_CBAJI%20web%20window.png",
+            "https://images.6223027.com/mcs-images/announcement/bet14bdtf5/1749729940990_web%203.png",
+            "https://images.4033888.com/mcs-images/announcement/jlhotbdtf1/1755871124766_14.png",
+            "https://images.4033888.com/mcs-images/announcement/jlhotbdtf1/1755870759574_12.png",
+            "https://jeetbuzzhelp.com/jb_bdt/img/jb_1325x600BNBDT.jpg"
+        ];
+
+        // ===== BUILD SLIDER =====
+        const sliderTrack = document.getElementById('sliderTrack');
+        if (sliderTrack) {
+            // Duplicate images for seamless loop
+            const allImages = [...slideImages, ...slideImages];
+            allImages.forEach(imgSrc => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'slide-card';
+                slideDiv.innerHTML = `<img src="${imgSrc}" loading="lazy" alt="slide">`;
+                sliderTrack.appendChild(slideDiv);
+            });
+        }
+
+        // ===== BUILD CARDS (20 cards) =====
+        const container = document.getElementById('cards');
+        const cardCount = 20;
+
+        for (let i = 0; i < cardCount; i++) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const logoIndex = i % logos.length;
+            
+            card.innerHTML = `
+                <div class="logo-box">
+                    <img src="${logos[logoIndex]}" loading="lazy" alt="brand" onerror="this.src='https://placehold.co/200x90/1a1a2e/ffcc00?text=LOGO'">
+                </div>
+                <button class="btn">PLAY NOW <i class="fas fa-arrow-right"></i></button>
+            `;
+            
+            // Card click handler
+            card.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'BUTTON') {
+                    window.open('https://example.com', '_blank');
+                }
+            });
+            
+            // Button click handler
+            const btn = card.querySelector('.btn');
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.open('https://example.com', '_blank');
+            });
+            
+            container.appendChild(card);
+        }
+
+        // ===== HEADER INTERACTIONS =====
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        const body = document.body;
+
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            });
+        }
+
+        // Close menu on link click
+        const navLinks = document.querySelectorAll('.menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                if (navMenu.classList.contains('active')) {
+                    mobileToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            });
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Logo click - scroll to top
+        const logoClick = document.getElementById('logoClick');
+        if (logoClick) {
+            logoClick.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                navLinks.forEach(l => l.classList.remove('active'));
+                if (navLinks[0]) navLinks[0].classList.add('active');
+            });
+        }
+
+        // Close menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900 && navMenu.classList.contains('active')) {
+                mobileToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+
+        // ESC key to close menu
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                mobileToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+
+        console.log('Casino Lobby Pro loaded successfully with fixed footer alignment!');
+</script>
+</body>
+</html>
